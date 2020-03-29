@@ -24,7 +24,7 @@ Checks if a pending order has been executed.
 
 Gets candles from coinbase API, then computes Heikin Ashi candles and the 10 window moving average on these. It makes a decision whether to buy or sell based on the last HA candle and the 10MA.
 ### Broker
-Executes, and checks whether they have been fulfilled, buy/sell orders that come from the CandleWatcher.
+Executes buy/sell orders that come from the CandleWatcher, and checks whether they have been fulfilled.
 
 A few caveats:
 - in order to determine the buy/sell price of an order, it checks the current order book and takes the average between the latest ask and bid. (if you know of a better way let me know)
@@ -38,6 +38,3 @@ Paypal: italo dot armenti at gmail dot com
 BTC: bc1qg3qq885ztne4xaltqajv6zzh9ctq0m95ax6g5c
 
 ETH: 0x194C67cc3894953C5f78956FDf66b07C618Cf0f4
-
-
-/Applications/IntelliJ\ IDEA.app/Contents/jbr/Contents/Home/bin/java -jar trader-1.0-SNAPSHOT-jar-with-dependencies.jar 
