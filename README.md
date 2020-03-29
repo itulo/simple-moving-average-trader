@@ -28,8 +28,9 @@ Gets candles from coinbase API, then computes Heikin Ashi candles and the 10 win
 Executes buy/sell orders that come from the CandleWatcher, and checks whether they have been fulfilled.
 
 A few caveats:
-- in order to determine the buy/sell price of an order, it checks the current order book and takes the average between the latest ask and bid. (if you know of a better way let me know)
+- in order to determine the buy/sell price for an order, it checks the current order book and takes the average between the latest ask and bid. (if you know of a better way let me know)
 - the size of a buy order is computed based on how much of your money you want to invest and the price. If the computed size is too small or too big, then the minimum or maximum size for the trading pair is used.
+- it holds only one order at the time
 
 ## Donations
 If the trader made you money remember about me and donate. If the trader lost your money donate so I can improve it.
