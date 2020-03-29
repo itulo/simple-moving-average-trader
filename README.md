@@ -17,13 +17,14 @@ It does not take short trades.
 You can run the trader in test mode (with coinbase client using the sandbox) by setting it into the configuration file.
 
 ## Functionality
-### Main
+Logs are visible in the console and also saved to trader.log.
+### Main.java
 Runs the CandleWatcher 3 times during the candle period you set in the configuration file (if your candle period is 24h, it will run the CandleWatcher every 8 hours).
-### CandleWatcher
+### CandleWatcher.java
 Checks if a pending order has been executed.
 
 Gets candles from coinbase API, then computes Heikin Ashi candles and the 10 window moving average on these. It makes a decision whether to buy or sell based on the last HA candle and the 10MA.
-### Broker
+### Broker.java
 Executes buy/sell orders that come from the CandleWatcher, and checks whether they have been fulfilled.
 
 A few caveats:
