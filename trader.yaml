@@ -1,0 +1,25 @@
+client:
+  # set to true if you want the coinbase client to use the sandbox
+  # remember that in that case you need to get API keys from the sandbox: https://public.sandbox.pro.coinbase.com/profile/api
+  useSandbox: false
+  # coinbase passphrase, api key and api secret (generate them from https://pro.coinbase.com/profile/api)
+  passphrase: 
+  apiKey: 
+  apiSecret:
+
+watcher:
+  # candle period in seconds
+  # Coinbase supports: 60 (1 minute), 300 (5 min), 900 (15 min), 3600 (1 hour), 21600 (6h), 86400 (24h) - https://docs.pro.coinbase.com/#get-historic-rates
+  candlePeriod: 86400
+  movingAverageWindow: 10
+  # pair you want to trade
+  tradingPair: BTC-EUR
+
+broker:
+  # currency you use to buy cryptocurrencies
+  tradingCurrency: EUR
+  # max number of digits after the comma that there can be in an order sent to the exchange
+  # for BTC it is 0.00000001
+  productScale: 8
+  # how much of your tradingCurrency portfolio to invest in each trade: 1 = 100%
+  portfolioInvest: 0.05
