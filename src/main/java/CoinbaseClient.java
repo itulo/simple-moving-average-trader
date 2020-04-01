@@ -178,12 +178,18 @@ public class CoinbaseClient {
   }
 
   // https://docs.pro.coinbase.com/#get-an-order
-  public Order getOrder(String orderId) {
+  public Optional<Order> getOrder(String orderId) {
     final String requestPath = "/orders/" + orderId;
 
     Response response = get(requestPath);
 
-    return response.readEntity(Order.class);
+    if (response.getStatus() != Response.Status.OK.getStatusCode()) {
+      logger.error("getOrder response was not 200 but was {}\n {}", response.getStatus(),
+              response.readEntity(String.class));
+      return Optional.empty();
+    }
+
+    return Optional.of(response.readEntity(Order.class));
   }
 
 }

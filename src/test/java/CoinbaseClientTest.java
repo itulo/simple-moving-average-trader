@@ -92,7 +92,7 @@ public class CoinbaseClientTest {
     assertEquals(TRADING_PAIR, order.getProduct_id());
     assertEquals("pending", order.getStatus());
 
-    Order checkOrder = client.getOrder(order.getId());
+    Order checkOrder = client.getOrder(order.getId()).get();
     assertEquals(order.getId(), order.getId());
     assertEquals(order.getSide(), checkOrder.getSide());
     assertEquals(order.getSize(), checkOrder.getSize());
