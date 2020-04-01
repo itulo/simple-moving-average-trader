@@ -4,7 +4,7 @@ This codebase implements the Simple Moving Average Strategy described by Mr. And
 This trader enters a long position by buying a cryptocurrency on Coinbase, and exits by selling the whole position.
 It does not take short trades.
 
-**Use it at your own risk**.
+**Use it at your own risk. And do not invest money you cannot afford to lose**.
 
 ## Getting started
 - [Create an account in coinbase](https://www.coinbase.com/join/arment_35) if you haven't already
