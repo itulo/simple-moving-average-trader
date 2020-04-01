@@ -1,5 +1,5 @@
 # Trader on Coinbase exchange
-This codebase implements the strategy described by Mr. Anderson in a [series of tweets](https://twitter.com/TrueCrypto28/status/1012359287706996736): from the daily chart, get Heikin Ashi candles and then compute the 10 moving average. If the current candle is green and rises above the 10MA, then take a long position; exit when the candle becomes red. If the strategy has a name please let me know.
+This codebase implements the Simple Moving Average Strategy described by Mr. Anderson in a [series of tweets](https://twitter.com/TrueCrypto28/status/1012359287706996736): from the daily chart, get Heikin Ashi candles and then compute the 10 moving average. If the current candle is green and rises above the 10MA, then take a long position; exit when the candle becomes red. If the strategy has a name please let me know.
 
 This trader enters a long position by buying a cryptocurrency on Coinbase, and exits by selling the whole position.
 It does not take short trades.
