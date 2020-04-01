@@ -26,6 +26,10 @@ public class CandleWatcher implements Runnable {
     this.broker = broker;
   }
 
+  private void logDecision(double ma, List<Candle> HACandles, Candle currentCandle){
+    logger.info("{}MA: {}\ncurrent and previous HA candles:\n{}\n{}\n current candle:\n{}", watcherConf.getMovingAverageWindow(), ma, HACandles.get(0), HACandles.get(1), currentCandle);
+  }
+
   public void run() {
     // check if the broker has any pending orders
     broker.checkPendingOrder();
@@ -56,6 +60,7 @@ public class CandleWatcher implements Runnable {
     Candle ha = HACandles.get(0);
 
     if (ha.getColor() == Candle.Color.GREEN && ha.getClose() > ma && !hasPosition) {
+      logDecision(ma, HACandles, candles.get(0));
       logger.info("Enter position at {}", candles.get(0).getClose());
 
       broker.buy(watcherConf.getTradingPair(), candles.get(0).getClose());
@@ -63,6 +68,7 @@ public class CandleWatcher implements Runnable {
     }
     if (hasPosition && ha.getColor() == Candle.Color.RED) {
       logger.info("Exit position at {}", candles.get(0).getClose());
+      logDecision(ma, HACandles, candles.get(0));
 
       broker.sell(watcherConf.getTradingPair(), candles.get(0).getClose());
       hasPosition = false;
