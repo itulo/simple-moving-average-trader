@@ -94,7 +94,7 @@ public class Broker {
   }
 
   /**
-   * Make an order only if we don't have a position yet
+   * Make a buy order only if we don't have a position yet
    *
    * @param tradingPair
    * @param lastClosePrice
@@ -114,14 +114,35 @@ public class Broker {
     }
   }
 
+  /**
+   * Make a sell order for the whole position
+   * If order is pending or open, sell what has been bought and cancel the rest
+   *
+   * @param tradingPair
+   * @param lastClosePrice
+   */
   public void sell(String tradingPair, double lastClosePrice) {
-    if (!order.isPresent() || (order.isPresent() && BUY.equalsIgnoreCase(order.get().getSide()))) {
-      final double price = getPrice(tradingPair, lastClosePrice);
-      double size = order.get().getFilled_size();
-      logger.info("Sending order sell, size {}, at price {}", size, price);
-      Optional<Order> orderResponse = client.postOrder(SELL, tradingPair, size, price);
-      order = orderResponse;
-      logger.info(orderResponse.get());
+    if (order.isPresent() && BUY.equalsIgnoreCase(order.get().getSide())) {
+      Order currentOrder = order.get();
+      if(ORDER_PENDING.equals(currentOrder.getStatus())){
+        // if order still pending then cancel it
+        logger.info("Order still pending, cancelling now");
+        client.cancelOrder(currentOrder.getId());
+        order = Optional.empty();
+      } else {
+        final double price = getPrice(tradingPair, lastClosePrice);
+        double size = currentOrder.getFilled_size();
+        logger.info("Sending order sell, size {}, at price {}", size, price);
+        Optional<Order> orderResponse = client.postOrder(SELL, tradingPair, size, price);
+        order = orderResponse;
+        logger.info(orderResponse.get());
+
+        if (currentOrder.getFilled_size() != currentOrder.getSize()){
+          // if order still open (not filled completely) then cancel it
+          logger.info("Order still open, cancelling now");
+          client.cancelOrder(currentOrder.getId());
+        }
+      }
     }
   }
 }

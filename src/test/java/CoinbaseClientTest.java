@@ -79,11 +79,11 @@ public class CoinbaseClientTest {
   }
 
   @Test
-  public void postOrderAndGetOrder() {
+  public void postOrder_GetOrder_CancelOrder() {
     final String action = "sell";
     final double size = 1;
     final double price = 100000;
-    Optional<Order> o = client.postOrder(action, TRADING_PAIR, size, price);
+    final Optional<Order> o = client.postOrder(action, TRADING_PAIR, size, price);
 
     Order order = o.get();
     assertEquals(action, order.getSide());
@@ -98,5 +98,7 @@ public class CoinbaseClientTest {
     assertEquals(order.getSize(), checkOrder.getSize());
     assertEquals(order.getPrice(), checkOrder.getPrice());
     assertEquals(order.getProduct_id(), checkOrder.getProduct_id());
+
+    client.cancelOrder(order.getId());
   }
 }

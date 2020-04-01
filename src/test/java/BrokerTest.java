@@ -18,7 +18,7 @@ public class BrokerTest {
     }
 
     @Test
-    public void checkPendingOrder() {
+    public void checkPendingOrder_BrokerHasOrder() {
         Order doneOrder = new Order();
         doneOrder.setStatus("done");
         doReturn(doneOrder).when(clientMock).getOrder(anyString());

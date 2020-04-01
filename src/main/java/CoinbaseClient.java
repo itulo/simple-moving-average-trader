@@ -12,10 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.client.*;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedHashMap;
@@ -190,6 +187,18 @@ public class CoinbaseClient {
     }
 
     return Optional.of(response.readEntity(Order.class));
+  }
+
+  // https://docs.pro.coinbase.com/#cancel-an-order
+  public void cancelOrder(String orderId) {
+    final String requestPath = "/orders/" + orderId;
+    final WebTarget target = client.target(baseUrl).path(requestPath);
+    Response response = target.request().headers(addCoinbaseHeader("DELETE", requestPath, "")).delete();
+
+    if (response.getStatus() != Response.Status.OK.getStatusCode()) {
+      logger.error("cancelOrder response was not 200 but was {}\n {}", response.getStatus(),
+              response.readEntity(String.class));
+    }
   }
 
 }
