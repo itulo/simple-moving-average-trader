@@ -85,9 +85,9 @@ public class Broker {
     if (order.isPresent() && ORDER_PENDING.equals(order.get().getStatus())) {
       Optional<Order> orderResponse = client.getOrder(order.get().getId());
       if (orderResponse.isPresent() && ORDER_DONE.equals(orderResponse.get().getStatus())) {
-        logger.info("Order done: {}", orderResponse);
+        logger.info("Order done: {}", orderResponse.get());
       } else {
-        logger.info("Order not done yet: {}", orderResponse);
+        logger.info("Order not done yet: {}", orderResponse.get());
       }
       order = orderResponse;
     }
