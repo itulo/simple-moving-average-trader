@@ -95,9 +95,9 @@ public class CoinbaseClient {
     Response response = target.request().headers(addCoinbaseHeader("GET", requestPath, "")).get();
 
     if (response.getStatus() != Response.Status.OK.getStatusCode()) {
-      logger.warn("Call to {} received response that was not 200 but was {}", requestPath,
-              response.getStatus());
-      System.out.println("Call to " + requestPath + " received response that was not 200 but was " + response.getStatus());
+      response.bufferEntity();
+      logger.warn("Call to {} received response that was not 200 but was {}, body {}", requestPath,
+              response.getStatus(), response.readEntity(String.class));
     }
 
     return response;
