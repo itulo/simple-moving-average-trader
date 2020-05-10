@@ -19,6 +19,7 @@ public class Broker {
 
   private static final String ORDER_PENDING = "pending";
   private static final String ORDER_DONE = "done";
+  private static final String ORDER_OPEN = "open";
   private static final String BUY = "buy";
   private static final String SELL = "sell";
 
@@ -82,7 +83,7 @@ public class Broker {
    * If order is in pending status, check the status again
    */
   public void checkPendingOrder() {
-    if (order.isPresent() && ORDER_PENDING.equals(order.get().getStatus())) {
+    if (order.isPresent() && (ORDER_PENDING.equals(order.get().getStatus()) || ORDER_OPEN.equals(order.get().getStatus()))) {
       Optional<Order> orderResponse = client.getOrder(order.get().getId());
       if (orderResponse.isPresent() && ORDER_DONE.equals(orderResponse.get().getStatus())) {
         logger.info("Order done: {}", orderResponse.get());
