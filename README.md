@@ -40,3 +40,5 @@ Paypal: italo dot armenti at gmail dot com
 BTC: bc1qg3qq885ztne4xaltqajv6zzh9ctq0m95ax6g5c
 
 ETH: 0x4C6B3Fe9F7A790b74febc1cB6D1D7269eAcd96c1
+
+... or give a star to the project :)
