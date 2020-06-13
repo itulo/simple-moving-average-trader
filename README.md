@@ -35,8 +35,6 @@ A few caveats:
 ## Donations
 If the trader made you money remember about me and donate. If the trader lost your money donate so I can improve it.
 
-Paypal: italo dot armenti at gmail dot com
-
 BTC: bc1qg3qq885ztne4xaltqajv6zzh9ctq0m95ax6g5c
 
 ETH: 0x4C6B3Fe9F7A790b74febc1cB6D1D7269eAcd96c1
